@@ -5,8 +5,8 @@ module.exports = function (response, date) {
     confirmed: covidData.cases.total,
     deaths: covidData.deaths.total,
     css: {
-      x: 0,
-      y: 0,
+      x: -298,
+      y: 13,
     },
     date: date,
     deaths_diff: covidData.deaths.new,

@@ -19,7 +19,7 @@ function getUSAData() {
     method: "post",
     data: { date: time },
   }).then(function (data) {
-    appendCaseData("USA", data, data);
+    appendCaseData("USA", data, data, "../images/country-flags.png");
   });
 }
 
@@ -159,11 +159,15 @@ function updateCovidStateHTML(state, data) {
   }
 }
 
-function appendCaseData(state, selected, data) {
+function appendCaseData(state, selected, data, img) {
+  let backgroundImg;
+  img == null
+    ? (backgroundImg = "/images/state-flags.jpg")
+    : (backgroundImg = img);
   let stateH1El = $("<h1>").text(state);
   let flagContain = $("<div>");
   flagContain.attr("id", "flag-contain");
-  flagContain.css("background-image", `url(/images/state-flags.jpg)`);
+  flagContain.css("background-image", `url(${backgroundImg})`);
   flagContain.css(
     "background-position",
     `${selected.css.x}px ${selected.css.y}px`
