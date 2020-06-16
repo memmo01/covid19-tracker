@@ -11,7 +11,19 @@ const attribution =
 const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 L.tileLayer(tileUrl, { attribution }).addTo(mymap);
 
-$.ajax({ url: "/api/getstuff", method: "get" }).then(function (Data) {
+getUSAData();
+
+function getUSAData() {
+  $.ajax({
+    url: "/api/covidUSATotals",
+    method: "post",
+    data: { date: time },
+  }).then(function (data) {
+    appendCaseData("USA", data, data);
+  });
+}
+
+$.ajax({ url: "/api/stateDataSorted", method: "get" }).then(function (Data) {
   statesData = Data;
   startApp();
 });
@@ -136,30 +148,7 @@ function updateCovidStateHTML(state, data) {
     }
   });
   if (selected.length > 0) {
-    let stateH1El = $("<h1>").text(state);
-    let flagContain = $("<div>");
-    flagContain.attr("id", "flag-contain");
-    flagContain.css("background-image", `url(/images/state-flags.jpg)`);
-    flagContain.css(
-      "background-position",
-      `${selected[0].css.x}px ${selected[0].css.y}px`
-    );
-    let ulEl = $("<ul>");
-    ulEl.attr("id", "state-data");
-    let list = `<li id="state-date"><p>*As of :${data[0].date}</p></li>
-          <li><p>${data[0].confirmed}</p><div class="data-title">Total Cases </h3> </li>
-          <div class="separate-line"></div>
-            <li><p>${data[0].deaths}</p><div class="data-title">Confired Deaths </div > </li>
-            <div class="separate-line"></div>
-            <li><p> ${data[0].deaths_diff}</p><div class="data-title">Confirmed Deaths Compared to Previous Day </div></li>
-            <div class="separate-line"></div>
-          <li><p> ${data[0].confirmed_diff}</p><div class="data-title">Confirmed Cases Compared to Previous Day </div></li>
-          
-          `;
-
-    ulEl.append(list);
-
-    $("#state-container").append(flagContain, stateH1El, ulEl);
+    appendCaseData(state, selected[0], data[0]);
     return true;
   } else {
     let newSelectionH1El = $("<h2>").text(
@@ -168,4 +157,31 @@ function updateCovidStateHTML(state, data) {
     $("#state-container").append(newSelectionH1El);
     return false;
   }
+}
+
+function appendCaseData(state, selected, data) {
+  let stateH1El = $("<h1>").text(state);
+  let flagContain = $("<div>");
+  flagContain.attr("id", "flag-contain");
+  flagContain.css("background-image", `url(/images/state-flags.jpg)`);
+  flagContain.css(
+    "background-position",
+    `${selected.css.x}px ${selected.css.y}px`
+  );
+  let ulEl = $("<ul>");
+  ulEl.attr("id", "state-data");
+  let list = `<li id="state-date"><p>*As of :${data.date}</p></li>
+          <li><p>${data.confirmed.toLocaleString()}</p><div class="data-title">Total Cases </h3> </li>
+          <div class="separate-line"></div>
+            <li><p>${data.deaths.toLocaleString()}</p><div class="data-title">Confired Deaths </div > </li>
+            <div class="separate-line"></div>
+            <li><p> ${data.deaths_diff.toLocaleString()}</p><div class="data-title">Confirmed Deaths Compared to Previous Day </div></li>
+            <div class="separate-line"></div>
+          <li><p> ${data.confirmed_diff.toLocaleString()}</p><div class="data-title">Confirmed Cases Compared to Previous Day </div></li>
+          
+          `;
+
+  ulEl.append(list);
+
+  $("#state-container").append(flagContain, stateH1El, ulEl);
 }
