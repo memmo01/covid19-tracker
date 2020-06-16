@@ -1,4 +1,5 @@
 const sortData = require("../utilities/update-map-data.js");
+const countryTotal = require("../utilities/country-total.js");
 
 module.exports = function (app, axios) {
   app.post("/api/checkcovid", function (req, res) {
@@ -38,7 +39,7 @@ module.exports = function (app, axios) {
       });
     });
 
-  app.get("/api/getstuff", function (req, res) {
+  app.get("/api/stateDataSorted", function (req, res) {
     axios({
       url: "https://covid-19-statistics.p.rapidapi.com/reports?country=usa",
       method: "GET",
@@ -49,6 +50,24 @@ module.exports = function (app, axios) {
     }).then(function (response) {
       let sortedData = sortData(response.data.data);
       res.json(sortedData);
+    });
+  });
+
+  app.post("/api/covidUSATotals", function (req, res) {
+    console.log(req.body.date);
+    axios({
+      url:
+        "https://covid-193.p.rapidapi.com/history?day=" +
+        req.body.date +
+        "&country=usa",
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "covid-193.p.rapidapi.com",
+        "x-rapidapi-key": process.env.API_KEY,
+      },
+    }).then(function (response) {
+      let totals = countryTotal(response, req.body.date);
+      res.json(totals);
     });
   });
 };
