@@ -1,47 +1,55 @@
-let time = moment().add(-1, "days").format("YYYY-MM-DD");
-console.log(time);
+let marker;
+let layer;
+let statesData;
+let time = moment().add(-2, "days").format("YYYY-MM-DD");
+
 //creates map and places the view in the center of the country
 var mymap = L.map("mapid").setView([38.3, -98.79], 4);
 
-let marker;
-let layer;
-var mapboxAccessToken = "";
-L.tileLayer(
-  "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=" +
-    mapboxAccessToken,
-  {
-    id: "mapbox/light-v9",
-    tileSize: 512,
-    zoomOffset: -1,
-  }
-).addTo(mymap);
+const attribution =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+L.tileLayer(tileUrl, { attribution }).addTo(mymap);
 
-//statesData is an object grabbed from the state.js file which outlines the state borders
-L.geoJson(statesData);
+$.ajax({ url: "/api/getstuff", method: "get" }).then(function (Data) {
+  statesData = Data;
+  startApp();
+});
 
-//based on information in the statesData object feature.properties.density), get color will change the background color of the state
-function getColor(d) {
-  return d > 1000
-    ? "#800026"
-    : d > 500
-    ? "#BD0026"
-    : d > 200
-    ? "#E31A1C"
-    : d > 100
-    ? "#FC4E2A"
-    : d > 50
-    ? "#FD8D3C"
-    : d > 20
-    ? "#FEB24C"
-    : d > 10
-    ? "#FED976"
-    : "#FFEDA0";
+function startApp() {
+  console.log(statesData);
+  $(".load-container >.loader").removeClass("show");
+  L.geoJson(statesData);
+  styleData();
 }
 
+//based on information in the statesData object feature.properties.cases), get color will change the background color of the state
+function getColor(d) {
+  return d > 150000
+    ? "#b10026"
+    : d > 100000
+    ? "#e31a1c"
+    : d > 50000
+    ? "#fc4e2a"
+    : d > 25000
+    ? "#fd8d3c"
+    : d > 10000
+    ? "#feb24c"
+    : d > 5000
+    ? "#fed976"
+    : d > 1000
+    ? "#ffeda0"
+    : "#ffffcc";
+}
+
+function styleData() {
+  console.log(L.geoJson);
+  L.geoJson(statesData, { style: style }).addTo(mymap);
+}
 //based on what the user is searching : the feature.properties. whatever can be changed. (daily death, daily increase, total deaths, total cases)
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties.density),
+    fillColor: getColor(feature.properties.cases),
     weight: 2,
     opacity: 1,
     color: "white",
@@ -49,7 +57,6 @@ function style(feature) {
     fillOpacity: 0.7,
   };
 }
-L.geoJson(statesData, { style: style }).addTo(mymap);
 
 //when map is clicked grab the lat and lng. then find out what state it is in. then make a call to the covid database. get information about that state and append it to the marker popup and zoom in on that state
 let preventDblClick = 0;
@@ -75,11 +82,8 @@ function onMapClick(e) {
     checkGeo(lat, lng).then(function (response) {
       state = response.results[0].region;
 
-      checkCovid(state).then(function (r) {
-        console.log("HERE");
-        console.log(r.data);
-        updateCovidStateHTML(state, r.data);
-        console.log(r.data);
+      checkCovid(state).then(function (response) {
+        updateCovidStateHTML(state, response.data);
 
         layer = L.marker([lat, lng]);
         layer

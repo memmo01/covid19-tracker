@@ -1,3 +1,5 @@
+const sortData = require("../utilities/update-map-data.js");
+
 module.exports = function (app, axios) {
   app.post("/api/checkcovid", function (req, res) {
     axios({
@@ -35,4 +37,18 @@ module.exports = function (app, axios) {
         res.send(response.data);
       });
     });
+
+  app.get("/api/getstuff", function (req, res) {
+    axios({
+      url: "https://covid-19-statistics.p.rapidapi.com/reports?country=usa",
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+        "x-rapidapi-key": process.env.API_KEY,
+      },
+    }).then(function (response) {
+      let sortedData = sortData(response.data.data);
+      res.json(sortedData);
+    });
+  });
 };
