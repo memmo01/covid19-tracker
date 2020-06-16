@@ -67,24 +67,22 @@ function onMapClick(e) {
   loader.addClass("loader show");
   preventDblClick++;
   $("#state-container").append(loader);
-  if (preventDblClick > 1) {
-    return;
-  } else {
-    let lat = e.latlng.lat;
-    let lng = e.latlng.lng;
 
-    let state;
-    if (layer) {
-      layer.remove();
-    }
+  let lat = e.latlng.lat;
+  let lng = e.latlng.lng;
 
-    mymap.flyTo(new L.LatLng(lat, lng), 6);
-    checkGeo(lat, lng).then(function (response) {
-      state = response.results[0].region;
+  let state;
+  if (layer) {
+    layer.remove();
+  }
 
-      checkCovid(state).then(function (response) {
-        updateCovidStateHTML(state, response.data);
+  mymap.flyTo(new L.LatLng(lat, lng), 6);
+  checkGeo(lat, lng).then(function (response) {
+    state = response.results[0].region;
 
+    checkCovid(state).then(function (response) {
+      let inUS = updateCovidStateHTML(state, response.data);
+      if (inUS) {
         layer = L.marker([lat, lng]);
         layer
           .addTo(mymap)
@@ -92,14 +90,14 @@ function onMapClick(e) {
             "<h1>" +
               state +
               "</h1><p>confirmed cases: " +
-              r.data[0].confirmed +
+              response.data[0].confirmed +
               "</p>"
           )
           .openPopup();
-        preventDblClick = 0;
-      });
+      }
+      preventDblClick = 0;
     });
-  }
+  });
 }
 
 function checkCovid(state) {
@@ -131,35 +129,43 @@ mymap.on("dblclick", function () {
 });
 
 function updateCovidStateHTML(state, data) {
-  console.log(state + data);
   $("#state-container >.loader").removeClass("show");
   let selected = statesData.features.filter(function (item) {
     if (item.properties.name === state) {
-      console.log("winner");
-
       return item;
     }
   });
-
-  let stateH1El = $("<h1>").text(state);
-  let flagContain = $("<div>");
-  flagContain.attr("id", "flag-contain");
-  flagContain.css("background-image", `url(/images/state-flags.jpg)`);
-  flagContain.css(
-    "background-position",
-    `${selected[0].css.x}px ${selected[0].css.y}px`
-  );
-  let ulEl = $("<ul>");
-  ulEl.attr("id", "state-data");
-  let list = `<li id="state-date"><p>As of:${data[0].date}</p></li>
+  if (selected.length > 0) {
+    let stateH1El = $("<h1>").text(state);
+    let flagContain = $("<div>");
+    flagContain.attr("id", "flag-contain");
+    flagContain.css("background-image", `url(/images/state-flags.jpg)`);
+    flagContain.css(
+      "background-position",
+      `${selected[0].css.x}px ${selected[0].css.y}px`
+    );
+    let ulEl = $("<ul>");
+    ulEl.attr("id", "state-data");
+    let list = `<li id="state-date"><p>*As of :${data[0].date}</p></li>
           <li><p>${data[0].confirmed}</p><div class="data-title">Total Cases </h3> </li>
+          <div class="separate-line"></div>
             <li><p>${data[0].deaths}</p><div class="data-title">Confired Deaths </div > </li>
-            <li><div class="data-title">Confirmed Deaths Compared to Previous Day: </div><p> ${data[0].deaths_diff}</p></li>
-          <li><h3>Confirmed Cases Compared to Previous Day: </h3><p> ${data[0].confirmed_diff}</p></li>
+            <div class="separate-line"></div>
+            <li><p> ${data[0].deaths_diff}</p><div class="data-title">Confirmed Deaths Compared to Previous Day </div></li>
+            <div class="separate-line"></div>
+          <li><p> ${data[0].confirmed_diff}</p><div class="data-title">Confirmed Cases Compared to Previous Day </div></li>
           
           `;
 
-  ulEl.append(list);
+    ulEl.append(list);
 
-  $("#state-container").append(flagContain, stateH1El, ulEl);
+    $("#state-container").append(flagContain, stateH1El, ulEl);
+    return true;
+  } else {
+    let newSelectionH1El = $("<h2>").text(
+      "Please select a state in the United States"
+    );
+    $("#state-container").append(newSelectionH1El);
+    return false;
+  }
 }

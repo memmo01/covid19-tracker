@@ -128,7 +128,7 @@ table {
   border-spacing: 0;
 }
 #mapid {
-  height: 590px;
+  height: 500px;
   width: 63%;
   float: left;
 }
@@ -141,15 +141,36 @@ table {
   display: inline-flex;
   position: relative;
   bottom: 27px;
+  font-size: 40px;
 }
 #state-data {
   list-style-type: none;
   padding: 0;
 }
+#state-data > li > p {
+  font-size: 30px;
+  padding-bottom: 10px;
+}
+#state-data > li {
+  padding-left: 10px;
+}
+#state-date > p {
+  text-align: center;
+  font-size: 15px !important;
+}
+.data-title {
+  font-size: 20px;
+}
 #flag-contain {
   height: 94px;
   width: 132px;
   display: inline-flex;
+}
+.separate-line {
+  border-bottom: 2px solid black;
+  width: 100%;
+  margin: 15px 0;
+  height: 2px;
 }
 
 .loader {
@@ -192,5 +213,16 @@ table {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 778px) {
+  #mapid {
+    width: 100%;
+    height: 350px;
+  }
+  #state-container {
+    min-width: 90vw;
+    padding: 10px 10px 30px 10px;
   }
 }
