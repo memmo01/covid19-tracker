@@ -154,6 +154,7 @@ table {
 
 .loader {
   border: 5px solid #f3f3f3;
+  border: 5px solid springgreen;
   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
   border-top: 5px solid #555;
@@ -165,6 +166,11 @@ table {
   display: none;
   margin: auto;
   text-align: center;
+  z-index: 999;
+}
+.load-container {
+  width: 63%;
+  height: 0px;
 }
 .show {
   display: block;

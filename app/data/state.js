@@ -1,4 +1,4 @@
-var statesData = {
+module.exports = {
   type: "FeatureCollection",
   features: [
     {
