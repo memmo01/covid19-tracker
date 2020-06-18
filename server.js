@@ -4,7 +4,7 @@ var app = express();
 const dotenv = require("dotenv").config();
 
 const axios = require("axios");
-var PORT = 8880;
+var PORT = process.env.PORT || 80;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
