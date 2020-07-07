@@ -15,6 +15,7 @@ app.use(express.static("app/public"));
 
 require("./app/routes/map-api.js")(app, axios);
 require("./app/routes/html-routes.js")(app);
+require("./app/routes/api-routes.js")(app);
 app.listen(PORT, function () {
   console.log("application is listening on PORT " + PORT);
 });
