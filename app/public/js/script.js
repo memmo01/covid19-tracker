@@ -29,7 +29,6 @@ $.ajax({ url: "/api/stateDataSorted", method: "get" }).then(function (Data) {
 });
 
 function startApp() {
-  console.log(statesData);
   $(".load-container >.loader").removeClass("show");
   L.geoJson(statesData);
   styleData();
@@ -94,8 +93,7 @@ function onMapClick(e) {
 
     checkCovid(state).then(function (response) {
       let inUS = updateCovidStateHTML(state, response.data);
-      console.log("**** HCEKC IT OUT");
-      console.log();
+
       if (inUS) {
         layer = L.marker([lat, lng]);
         layer
@@ -144,16 +142,16 @@ mymap.on("dblclick", function () {
 
 function updateCovidStateHTML(state, data) {
   // deconstruct data to organize in an object
-  const { active, confirmed, deaths, death_diff, confirmed_diff } = data[0];
+  const { active, confirmed, deaths, deaths_diff, confirmed_diff } = data[0];
 
   let stateData = {
     state: state,
     covidData: {
-      active: active,
-      confirmed: confirmed,
-      deaths: deaths,
-      death_diff: death_diff,
-      confirmed_diff: confirmed_diff,
+      active: active.toLocaleString(),
+      confirmed: confirmed.toLocaleString(),
+      deaths: deaths.toLocaleString(),
+      death_diff: deaths_diff.toLocaleString(),
+      confirmed_diff: confirmed_diff.toLocaleString(),
     },
   };
 
