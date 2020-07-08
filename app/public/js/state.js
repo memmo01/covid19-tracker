@@ -11,6 +11,10 @@ $.ajax({ url: "/api/state/" + covidState, method: "get" }).then(function (
   populateData(stateData);
 });
 
+$.get("/api/stateData", function (data) {
+  console.log(data);
+});
+
 //dynamically populate info to the site
 function populateData(stateData) {
   for (let key in stateData) {

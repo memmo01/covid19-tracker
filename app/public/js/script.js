@@ -94,6 +94,8 @@ function onMapClick(e) {
 
     checkCovid(state).then(function (response) {
       let inUS = updateCovidStateHTML(state, response.data);
+      console.log("**** HCEKC IT OUT");
+      console.log();
       if (inUS) {
         layer = L.marker([lat, lng]);
         layer
@@ -141,6 +143,23 @@ mymap.on("dblclick", function () {
 });
 
 function updateCovidStateHTML(state, data) {
+  // deconstruct data to organize in an object
+  const { active, confirmed, deaths, death_diff, confirmed_diff } = data[0];
+
+  let stateData = {
+    state: state,
+    covidData: {
+      active: active,
+      confirmed: confirmed,
+      deaths: deaths,
+      death_diff: death_diff,
+      confirmed_diff: confirmed_diff,
+    },
+  };
+
+  //send data to the server to be saved for later use on the individual state page
+  $.post("/api/saveStateData/", stateData);
+
   $("#state-container >.loader").removeClass("show");
   let selected = statesData.features.filter(function (item) {
     if (item.properties.name === state) {
@@ -182,7 +201,7 @@ function appendCaseData(state, selected, data, img) {
             <li><p> ${data.deaths_diff.toLocaleString()}</p><div class="data-title">Confirmed Deaths Compared to Previous Day </div></li>
             <div class="separate-line"></div>
           <li><p> ${data.confirmed_diff.toLocaleString()}</p><div class="data-title">Confirmed Cases Compared to Previous Day </div></li>
-          
+          <a href="/state/${state}" id="state-detail-link" >State Details</a>
           `;
 
   ulEl.append(list);

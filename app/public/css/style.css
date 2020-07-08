@@ -177,6 +177,23 @@ table {
   height: 2px;
 }
 
+#state-detail-link {
+  text-align: center;
+  display: block;
+  padding: 5px 10px;
+  margin-top: 20px;
+  width: fit-content;
+  margin: 20px auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+#state-detail-link:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 0px 2px black;
+}
+
 .loader {
   border: 5px solid #f3f3f3;
   border: 5px solid springgreen;
