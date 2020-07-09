@@ -17,6 +17,8 @@ $.get("/api/stateData", function (data) {
 //dynamically populate info to the site
 function populateData(stateData) {
   let { covidData } = stateData;
+  let backgroundCoordinates = getFlagInfo(stateData.state);
+
   let li = $("<li>");
   let title = $("<h2>");
   let active = $("<h2>");
@@ -24,6 +26,7 @@ function populateData(stateData) {
   let deaths = $("<h2>");
   let death_diff = $("<h2>");
   let confirm_diff = $("<h2>");
+
   title.text(stateData.state);
   active.text(`Active cases: ${covidData.active}`);
   confirmed.text(`Confirmed cases: ${covidData.confirmed}`);
@@ -37,4 +40,15 @@ function populateData(stateData) {
 
   li.append(title, active, confirmed, deaths, death_diff, confirm_diff);
   $(".state-general").append(li);
+}
+
+function getFlagInfo(state) {
+  let st = state.split(" ").join("");
+  let backgroundLocation = stateFlagLocation[st];
+  $("#flag-contain").css("background-image", `url(/images/state-flags.jpg)`);
+  $("#flag-contain").css(
+    "background-position",
+    `${backgroundLocation.x}px ${backgroundLocation.y}px`
+  );
+  return backgroundLocation;
 }
