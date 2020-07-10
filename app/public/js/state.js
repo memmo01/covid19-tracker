@@ -2,7 +2,7 @@ let path = window.location.pathname;
 let splitpath = path.split("/");
 //get url path to obtain state name
 let covidState = splitpath[splitpath.length - 1];
-
+let stateNoSpace;
 //make call to server using state needing info on
 // $.ajax({ url: "/api/state/" + covidState, method: "get" }).then(function (
 //   stateData
@@ -11,13 +11,15 @@ let covidState = splitpath[splitpath.length - 1];
 // });
 
 $.get("/api/stateData", function (data) {
-  populateData(data);
+  populateStateData(data);
+  stateCovidSite(data);
 });
 
 //dynamically populate info to the site
-function populateData(stateData) {
+function populateStateData(stateData) {
+  stateNoSpace = stateData.state.split(" ").join("");
   let { covidData } = stateData;
-  let backgroundCoordinates = getFlagInfo(stateData.state);
+  getFlagInfo(stateData.state);
 
   let li = $("<li>");
   let title = $("<h2>");
@@ -43,12 +45,34 @@ function populateData(stateData) {
 }
 
 function getFlagInfo(state) {
-  let st = state.split(" ").join("");
-  let backgroundLocation = stateFlagLocation[st];
+  let backgroundLocation = stateDetail[stateNoSpace];
   $("#flag-contain").css("background-image", `url(/images/state-flags.jpg)`);
   $("#flag-contain").css(
     "background-position",
     `${backgroundLocation.x}px ${backgroundLocation.y}px`
   );
-  return backgroundLocation;
+}
+
+//get state covid sites
+function stateCovidSite(data) {
+  let stateAbbr = stateDetail[stateNoSpace].abbr;
+
+  $.get("https://covidtracking.com/api/states/info", function (data) {
+    let stateCovidUrl = data.filter((stateData) => {
+      if (JSON.stringify(stateData.state) === JSON.stringify(stateAbbr)) {
+        return stateData;
+      }
+    });
+    populateToHTML(stateCovidUrl);
+    console.log(stateCovidUrl);
+  });
+
+  function populateToHTML(stateCovidlinks) {
+    let link = stateCovidlinks[0].covid19Site;
+    let stateLink = $("<a>");
+    stateLink.text("View Official State Site");
+    stateLink.attr("href", link);
+    stateLink.attr("target", "_blank");
+    $(".state-covid").append(stateLink);
+  }
 }
