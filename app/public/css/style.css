@@ -225,6 +225,14 @@ table {
   width: 200px;
 } */
 
+/* state html page  */
+
+.state-general,
+.state-covid {
+  width: 45%;
+  display: inline-block;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% {
