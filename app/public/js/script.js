@@ -26,6 +26,7 @@ function getUSAData() {
 $.ajax({ url: "/api/stateDataSorted", method: "get" }).then(function (Data) {
   statesData = Data;
   startApp();
+  getCovidNews();
 });
 
 function startApp() {
@@ -205,4 +206,10 @@ function appendCaseData(state, selected, data, img) {
   ulEl.append(list);
 
   $("#state-container").append(flagContain, stateH1El, ulEl);
+}
+
+function getCovidNews() {
+  $.get("/api/covidnews", function (data) {
+    console.log(data);
+  });
 }

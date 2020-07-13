@@ -74,10 +74,17 @@ function stateCovidSite(data) {
 
   function populateToHTML(stateCovidlinks) {
     let link = stateCovidlinks[0].covid19Site;
+    let twitter;
+
     let stateLink = createElement("<a>", "View Official State Site", [
       { attr: "href", value: link },
       { attr: "target", value: "blank" },
     ]);
+    if (stateCovidlinks[0].twitter) {
+      twitter = $("<h2>").text("Twitter: " + stateCovidlinks[0].twitter);
+
+      $(".state-general").append(twitter);
+    }
     $(".state-covid").append(stateLink);
   }
 }
