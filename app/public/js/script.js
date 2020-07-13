@@ -40,18 +40,18 @@ function getColor(d) {
   return d > 150000
     ? "#b10026"
     : d > 100000
-    ? "#e31a1c"
-    : d > 50000
-    ? "#fc4e2a"
-    : d > 25000
-    ? "#fd8d3c"
-    : d > 10000
-    ? "#feb24c"
-    : d > 5000
-    ? "#fed976"
-    : d > 1000
-    ? "#ffeda0"
-    : "#ffffcc";
+      ? "#e31a1c"
+      : d > 50000
+        ? "#fc4e2a"
+        : d > 25000
+          ? "#fd8d3c"
+          : d > 10000
+            ? "#feb24c"
+            : d > 5000
+              ? "#fed976"
+              : d > 1000
+                ? "#ffeda0"
+                : "#ffffcc";
 }
 
 function styleData() {
@@ -101,10 +101,10 @@ function onMapClick(e) {
           .addTo(mymap)
           .bindPopup(
             "<h1>" +
-              state +
-              "</h1><p>confirmed cases: " +
-              response.data[0].confirmed +
-              "</p>"
+            state +
+            "</h1><p>confirmed cases: " +
+            response.data[0].confirmed +
+            "</p>"
           )
           .openPopup();
       }
@@ -211,5 +211,54 @@ function appendCaseData(state, selected, data, img) {
 function getCovidNews() {
   $.get("/api/covidnews", function (data) {
     console.log(data);
+    populateCovidNews(data)
   });
+}
+
+
+
+
+
+// create an html element to contain the covid news list 
+function populateCovidNews(data) {
+  let covidContainer = $("<div>")
+  covidContainer.addClass("covid-container")
+
+  data.forEach(newsSection => {
+    let html = covidNewsHTML(newsSection)
+    covidContainer.append(html)
+
+
+  })
+
+  $("#news").append(covidContainer)
+
+
+}
+
+
+function covidNewsHTML(newsSection) {
+
+  let img;
+  // if there is an image in the api, set it to the img variable, if not then set the image source as # 
+  if (newsSection.images) {
+    img = newsSection.images[0].url
+  }
+  else {
+    img = '#'
+  }
+
+  // covid news html structure 
+  let html = `<li> 
+   <a href=${newsSection.webUrl} class="img-link">
+   <img src=${img} />
+   </a>
+   <article class="news-details">
+   <a href=${newsSection.webUrl}>${newsSection.title}</a>
+   <div class="news-name">${newsSection.provider.name}</div>
+   </article>
+
+   </li>`
+  return html
+
 }

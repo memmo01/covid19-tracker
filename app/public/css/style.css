@@ -194,6 +194,20 @@ table {
   box-shadow: inset 0px 0px 2px black;
 }
 
+/* covid news section */
+#news img{
+  max-width:265px;
+}
+
+#news .img-link, #news .news-details{
+  position: relative;
+    display: inline-block;
+}
+
+#news .news-details{
+    bottom: 97px;
+}
+
 .loader {
   border: 5px solid #f3f3f3;
   border: 5px solid springgreen;
