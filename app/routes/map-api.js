@@ -17,9 +17,13 @@ module.exports = function (app, axios) {
         "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
         "x-rapidapi-key": process.env.API_KEY,
       },
-    }).then(function (response) {
-      res.send(response.data);
-    });
+    })
+      .then(function (response) {
+        res.send(response.data);
+      })
+      .catch(function (err) {
+        res.send(err);
+      });
   }),
     app.post("/api/checkgeo", function (req, res) {
       axios({
@@ -34,9 +38,13 @@ module.exports = function (app, axios) {
           "x-rapidapi-host": "trueway-geocoding.p.rapidapi.com",
           "x-rapidapi-key": process.env.API_KEY,
         },
-      }).then(function (response) {
-        res.send(response.data);
-      });
+      })
+        .then(function (response) {
+          res.send(response.data);
+        })
+        .catch(function (err) {
+          res.send(err);
+        });
     });
 
   app.get("/api/stateDataSorted", function (req, res) {
@@ -54,7 +62,6 @@ module.exports = function (app, axios) {
   });
 
   app.post("/api/covidUSATotals", function (req, res) {
-    console.log(req.body.date);
     axios({
       url:
         "https://covid-193.p.rapidapi.com/history?day=" +

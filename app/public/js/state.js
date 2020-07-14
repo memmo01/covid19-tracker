@@ -1,23 +1,29 @@
 let path = window.location.pathname;
 let splitpath = path.split("/");
 //get url path to obtain state name
-let covidState = splitpath[splitpath.length - 1];
-let stateNoSpace;
-//make call to server using state needing info on
-// $.ajax({ url: "/api/state/" + covidState, method: "get" }).then(function (
-//   stateData
-// ) {
-//   populateData(stateData);
-// });
+let covidState = decodeURIComponent(splitpath[splitpath.length - 1]);
+let stateNoSpace = covidState.split(" ").join("");
+let time = moment().add(-2, "days").format("YYYY-MM-DD");
 
-$.get("/api/stateData", function (data) {
+checkCovid(covidState).then(function (response) {
+  let data = response.data[0];
   populateStateCovidData(data);
   populateStateInfo(data);
   stateCovidSite(data);
 });
 
+function checkCovid(state) {
+  return $.ajax({
+    method: "post",
+    url: "/api/checkcovid",
+    data: { state: state, time: time },
+  }).then(function (data) {
+    return data;
+  });
+}
+
 function populateStateInfo(data) {
-  let title = createElement("<h2>", data.state);
+  let title = createElement("<h2>", covidState);
   let population = createElement("<h2>", "population: ");
   let governor = createElement("<h2>", "Governor: ");
 
@@ -26,24 +32,22 @@ function populateStateInfo(data) {
 
 //dynamically populate info to the site
 function populateStateCovidData(stateData) {
-  stateNoSpace = stateData.state.split(" ").join("");
-  let { covidData } = stateData;
-  getFlagInfo(stateData.state);
+  getFlagInfo(covidState);
 
   let li = createElement("<li>");
-  let active = createElement("<h2>", `Active cases: ${covidData.active}`);
+  let active = createElement("<h2>", `Active cases: ${stateData.active}`);
   let confirmed = createElement(
     "<h2>",
-    `Confirmed cases: ${covidData.confirmed}`
+    `Confirmed cases: ${stateData.confirmed}`
   );
-  let deaths = createElement("<h2>", `Deaths: ${covidData.deaths}`);
+  let deaths = createElement("<h2>", `Deaths: ${stateData.deaths}`);
   let death_diff = createElement(
     "<h2>",
-    `Num of Deaths compared to previous day: ${covidData.death_diff}`
+    `Num of Deaths compared to previous day: ${stateData.death_diff}`
   );
   let confirm_diff = createElement(
     "<h2>",
-    `Num of Confirmed cases compared to previous day: ${covidData.confirmed_diff}`
+    `Num of Confirmed cases compared to previous day: ${stateData.confirmed_diff}`
   );
 
   li.append(active, confirmed, deaths, death_diff, confirm_diff);

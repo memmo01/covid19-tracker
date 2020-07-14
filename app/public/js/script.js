@@ -55,7 +55,6 @@ function getColor(d) {
 }
 
 function styleData() {
-  console.log(L.geoJson);
   L.geoJson(statesData, { style: style }).addTo(mymap);
 }
 //based on what the user is searching : the feature.properties. whatever can be changed. (daily death, daily increase, total deaths, total cases)
@@ -119,6 +118,14 @@ function checkCovid(state) {
     method: "post",
     url: "/api/checkcovid",
     data: { state: state, time: time },
+    timeout: 3000,
+    error: function (xmlhttprequest, textstatus, message) {
+      if (textstatus === "timeout") {
+        alert("got timeout");
+      } else {
+        alert(textstatus);
+      }
+    },
   }).then(function (data) {
     return data;
   });
@@ -129,8 +136,6 @@ function checkGeo(lat, lng) {
     url: "/api/checkgeo",
     method: "post",
     data: { lat: lat, lng: lng },
-  }).then(function (data) {
-    return data;
   });
 }
 
@@ -158,7 +163,6 @@ function updateCovidStateHTML(state, data) {
   };
 
   //send data to the server to be saved for later use on the individual state page
-  $.post("/api/saveStateData/", stateData);
 
   $("#state-container >.loader").removeClass("show");
   let selected = statesData.features.filter(function (item) {
@@ -211,7 +215,6 @@ function appendCaseData(state, selected, data, img) {
 
 function getCovidNews() {
   $.get("/api/covidnews", function (data) {
-    console.log(data);
     populateCovidNews(data);
   });
 }
@@ -233,7 +236,6 @@ function populateCovidNews(data) {
 }
 
 function covidNewsHTML(newsSection) {
-  console.log(newsSection.title);
   let img;
   // if there is an image in the api, set it to the img variable, if not then set the image source as #
   if (newsSection.images) {
