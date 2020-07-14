@@ -126,6 +126,11 @@ q:after {
   content: "";
   content: none;
 }
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -139,6 +144,7 @@ table {
   float: left;
   width: 30%;
   padding: 10px;
+  min-height:530px;
 }
 #state-container > h1 {
   display: inline-flex;
@@ -195,17 +201,40 @@ table {
 }
 
 /* covid news section */
+.covid-container{
+  width:63%;
+}
 #news img{
+
   max-width:265px;
 }
+#news li{
+  display:inline-flex;
+  padding:10px;
+}
 
-#news .img-link, #news .news-details{
+#news .img-link{
+  max-width:265px;
   position: relative;
     display: inline-block;
 }
-
 #news .news-details{
-    bottom: 97px;
+  display:block;
+  padding:10px 10px 10px 20px;
+}
+
+.news-details >a{
+  height:fit-content;
+  text-decoration:none;
+}
+.news-details  h2{
+  font-size:20px;
+  color:black;
+}
+
+.news-details p{
+color:rgba(0,0,0,0.6);
+  margin:10px auto;
 }
 
 .loader {

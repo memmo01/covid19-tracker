@@ -99,14 +99,16 @@ function onMapClick(e) {
         layer = L.marker([lat, lng]);
         layer
           .addTo(mymap)
-          .bindPopup(
-            "<h1>" +
-            state +
-            "</h1><p>confirmed cases: " +
-            response.data[0].confirmed +
-            "</p>"
-          )
-          .openPopup();
+
+        //pop up on map when clicked. add data here 
+        // .bindPopup(
+        //   "<h1>" +
+        //   state +
+        //   "</h1><p>confirmed cases: " +
+        //   response.data[0].confirmed +
+        //   "</p>"
+        // )
+        // .openPopup();
       }
       preventDblClick = 0;
     });
@@ -250,11 +252,14 @@ function covidNewsHTML(newsSection) {
 
   // covid news html structure 
   let html = `<li> 
-   <a href=${newsSection.webUrl} class="img-link">
+   <a href=${newsSection.webUrl} target="_blank" class="img-link">
    <img src=${img} />
    </a>
    <article class="news-details">
-   <a href=${newsSection.webUrl}>${newsSection.title}</a>
+   <a href=${newsSection.webUrl} target="_blank"><h2>${newsSection.title}</h2>
+   <p>${newsSection.excerpt}</p>
+   </a>
+
    <div class="news-name">${newsSection.provider.name}</div>
    </article>
 
