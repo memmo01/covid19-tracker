@@ -352,4 +352,28 @@ table {
   .key-num {
     font-size: 12px;
   }
+  .covid-container {
+    width: 100%;
+  }
+  #news li {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 600px) {
+  .covid-container {
+    width: 100%;
+  }
+  #news li {
+    display: block;
+    width: 95%;
+  }
+  #news .img-link {
+    display: block;
+    margin: auto;
+    max-width: 95%;
+  }
+  #news img {
+    max-width: 100%;
+  }
 }
