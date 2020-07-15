@@ -10,7 +10,7 @@ const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 L.tileLayer(tileUrl, { attribution }).addTo(mymap);
-
+getCovidNews();
 getUSAData();
 
 function getUSAData() {
@@ -26,7 +26,6 @@ function getUSAData() {
 $.ajax({ url: "/api/stateDataSorted", method: "get" }).then(function (Data) {
   statesData = Data;
   startApp();
-  getCovidNews();
 });
 
 function startApp() {
@@ -51,7 +50,7 @@ function getColor(d) {
     ? "#fed976"
     : d > 1000
     ? "#ffeda0"
-    : "#ffffcc";
+    : "green";
 }
 
 function styleData() {

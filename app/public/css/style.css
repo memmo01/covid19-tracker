@@ -126,6 +126,10 @@ q:after {
   content: "";
   content: none;
 }
+html,
+body {
+  overflow-x: hidden;
+}
 .clearfix::after {
   content: "";
   clear: both;
@@ -135,16 +139,52 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.map-container {
+  float: left;
+  width: 63%;
+}
 #mapid {
   height: 500px;
-  width: 63%;
-  float: left;
 }
+
+/* map key  */
+.map-key-container {
+  width: 100%;
+  position: relative;
+  clear: both;
+  text-align: center;
+  padding: 10px;
+}
+.map-key-container h1 {
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+
+.map-key {
+  text-align: center;
+  display: inline-flex;
+  width: 97%;
+  margin: auto;
+}
+.key-box {
+  width: 13%;
+  display: inline-block;
+}
+
+.key-color {
+  width: 100%;
+  height: 15px;
+}
+.key-num {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
 #state-container {
   float: left;
   width: 30%;
   padding: 10px;
-  min-height:530px;
+  min-height: 530px;
 }
 #state-container > h1 {
   display: inline-flex;
@@ -201,40 +241,39 @@ table {
 }
 
 /* covid news section */
-.covid-container{
-  width:63%;
+.covid-container {
+  width: 63%;
 }
-#news img{
+#news img {
+  max-width: 265px;
+}
+#news li {
+  display: inline-flex;
+  padding: 10px;
+}
 
-  max-width:265px;
-}
-#news li{
-  display:inline-flex;
-  padding:10px;
-}
-
-#news .img-link{
-  max-width:265px;
+#news .img-link {
+  max-width: 265px;
   position: relative;
-    display: inline-block;
+  display: inline-block;
 }
-#news .news-details{
-  display:block;
-  padding:10px 10px 10px 20px;
-}
-
-.news-details >a{
-  height:fit-content;
-  text-decoration:none;
-}
-.news-details  h2{
-  font-size:20px;
-  color:black;
+#news .news-details {
+  display: block;
+  padding: 10px 10px 10px 20px;
 }
 
-.news-details p{
-color:rgba(0,0,0,0.6);
-  margin:10px auto;
+.news-details > a {
+  height: fit-content;
+  text-decoration: none;
+}
+.news-details h2 {
+  font-size: 20px;
+  color: black;
+}
+
+.news-details p {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 10px auto;
 }
 
 .loader {
@@ -296,12 +335,21 @@ color:rgba(0,0,0,0.6);
 }
 
 @media (max-width: 778px) {
-  #mapid {
+  .map-container {
     width: 100%;
+  }
+  #mapid {
     height: 350px;
+    width: 100%;
   }
   #state-container {
     min-width: 90vw;
     padding: 10px 10px 30px 10px;
+  }
+  .map-key-container {
+    width: 95%;
+  }
+  .key-num {
+    font-size: 12px;
   }
 }
