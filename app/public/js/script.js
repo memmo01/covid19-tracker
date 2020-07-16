@@ -50,7 +50,7 @@ function getColor(d) {
     ? "#fed976"
     : d > 1000
     ? "#ffeda0"
-    : "green";
+    : "#fff7f7";
 }
 
 function styleData() {
@@ -204,8 +204,11 @@ function appendCaseData(state, selected, data, img) {
             <li><p> ${data.deaths_diff.toLocaleString()}</p><div class="data-title">Confirmed Deaths Compared to Previous Day </div></li>
             <div class="separate-line"></div>
           <li><p> ${data.confirmed_diff.toLocaleString()}</p><div class="data-title">Confirmed Cases Compared to Previous Day </div></li>
-          <a href="/state/${state}" id="state-detail-link" >State Details</a>
           `;
+
+  if (state !== "USA") {
+    list += `<a href="/state/${state}" id="state-detail-link" >State Details</a>`;
+  }
 
   ulEl.append(list);
 
@@ -222,6 +225,9 @@ function getCovidNews() {
 function populateCovidNews(data) {
   let covidContainer = $("<div>");
   covidContainer.addClass("covid-container");
+  let h1EL = $("<h1>");
+  h1EL.text("Covid-19 News");
+  covidContainer.append(h1EL);
 
   data.forEach((newsSection, i) => {
     //show 10 articles

@@ -241,8 +241,31 @@ table {
 }
 
 /* covid news section */
-.covid-container {
+
+.covid-container > h1 {
+  text-align: center;
+  font-size: 30px;
+  background-color: #0d3f67;
+  padding: 20px 0;
+  margin: 30px 10px;
+  color: white;
+}
+
+.usa-data-container {
+  width: 80%;
+  margin: 0 auto;
+  background-color: rgba(208, 223, 230, 0.3);
+}
+.usa-data-container > h1 {
+  text-align: center;
+  font-size: 30px;
+  background-color: #d0dfe6;
+  padding: 20px 0;
+}
+
+#news {
   width: 63%;
+  float: left;
 }
 #news img {
   max-width: 265px;
@@ -275,7 +298,15 @@ table {
   color: rgba(0, 0, 0, 0.6);
   margin: 10px auto;
 }
-
+#usa-data {
+  float: right;
+  width: 35%;
+  padding-top: 30px;
+}
+.chart,
+#quicklinks {
+  padding: 20px;
+}
 .loader {
   border: 5px solid #f3f3f3;
   border: 5px solid springgreen;
@@ -352,7 +383,7 @@ table {
   .key-num {
     font-size: 12px;
   }
-  .covid-container {
+  #news {
     width: 100%;
   }
   #news li {
@@ -375,5 +406,11 @@ table {
   }
   #news img {
     max-width: 100%;
+  }
+  #usa-data {
+    width: 100%;
+  }
+  .usa-data-container {
+    width: 95%;
   }
 }
