@@ -50,7 +50,7 @@ function getColor(d) {
     ? "#fed976"
     : d > 1000
     ? "#ffeda0"
-    : "#fff7f7";
+    : "blue";
 }
 
 function styleData() {

@@ -5,7 +5,7 @@ let statedata = require("../data/state.js");
 // statedata.features;
 
 module.exports = function (covidStateData) {
-  for (let i = 0; i <= 50; i++) {
+  for (let i = 0; i <= 741; i++) {
     for (let d = 0; d < statedata.features.length; d++) {
       if (
         statedata.features[d].properties.name ===
