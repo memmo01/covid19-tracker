@@ -2,9 +2,12 @@ let marker;
 let layer;
 let statesData;
 let time = moment().add(-2, "days").format("YYYY-MM-DD");
+let mapZoom;
+
+window.innerWidth < 600 ? (mapZoom = 3) : (mapZoom = 4);
 
 //creates map and places the view in the center of the country
-var mymap = L.map("mapid").setView([38.3, -98.79], 4);
+var mymap = L.map("mapid").setView([38.3, -98.79], mapZoom);
 
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
