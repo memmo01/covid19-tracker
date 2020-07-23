@@ -3,8 +3,12 @@ let layer;
 let statesData;
 let time = moment().add(-2, "days").format("YYYY-MM-DD");
 let mapZoom;
+let clickZoom;
 
-window.innerWidth < 600 ? (mapZoom = 3) : (mapZoom = 4);
+window.innerWidth < 600
+  ? (mapZoom = 3) && (clickZoom = 4)
+  : (mapZoom = 4) && (clickZoom = 5);
+window.innerWidth < 600;
 
 //creates map and places the view in the center of the country
 var mymap = L.map("mapid").setView([38.3, -98.79], mapZoom);
@@ -89,7 +93,7 @@ function onMapClick(e) {
     layer.remove();
   }
 
-  mymap.flyTo(new L.LatLng(lat, lng), 6);
+  mymap.flyTo(new L.LatLng(lat, lng), clickZoom);
   checkGeo(lat, lng).then(function (response) {
     state = response.results[0].region;
 
