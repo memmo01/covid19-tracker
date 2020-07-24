@@ -360,6 +360,28 @@ table {
   display: inline-block;
 }
 
+.state-covid > div > h2,
+.state-covid > a,
+#state-container > h2,
+#state-container > a {
+  font-size: 25px;
+  padding: 7px 0px;
+}
+.state-covid > h1 {
+  font-size: 40px;
+  padding: 40px 0 50px;
+}
+
+#state-container > a {
+  text-decoration: none;
+  display: block;
+}
+
+.graph-contain {
+  height: 445px;
+  overflow-x: auto;
+  width: fit-content;
+}
 /* Safari */
 @-webkit-keyframes spin {
   0% {

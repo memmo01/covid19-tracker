@@ -23,18 +23,19 @@ function checkCovid(state) {
 }
 
 function populateStateInfo(data) {
-  let title = createElement("<h2>", covidState);
+  let title = createElement("<h1>", covidState);
   let population = createElement("<h2>", "population: ");
   let governor = createElement("<h2>", "Governor: ");
 
-  $(".state-general").append(title, population, governor);
+  $("#state-container").append(title, population, governor);
 }
 
 //dynamically populate info to the site
 function populateStateCovidData(stateData) {
   getFlagInfo(covidState);
 
-  let li = createElement("<li>");
+  let div = createElement("<div>");
+  div.addClass("graph-contain");
   let active = createElement("<h2>", `Active cases: ${stateData.active}`);
   let confirmed = createElement(
     "<h2>",
@@ -50,8 +51,18 @@ function populateStateCovidData(stateData) {
     `Num of Confirmed cases compared to previous day: ${stateData.confirmed_diff}`
   );
 
-  li.append(active, confirmed, deaths, death_diff, confirm_diff);
-  $(".state-covid").append(li);
+  div.append(active, confirmed, deaths, death_diff, confirm_diff);
+  $(".state-covid").append(div);
+
+  attachImg(active, confirmed, deaths, death_diff, confirm_diff);
+
+  //this is a temporary graph placement. it eventually will display updated graph info using google analytics
+  function attachImg(...arg) {
+    arg.forEach((item) => {
+      let img = $("<img>").attr("src", "../images/download.png");
+      $(item).after(img);
+    });
+  }
 }
 
 function getFlagInfo(state) {
@@ -87,9 +98,9 @@ function stateCovidSite(data) {
     if (stateCovidlinks[0].twitter) {
       twitter = $("<h2>").text("Twitter: " + stateCovidlinks[0].twitter);
 
-      $(".state-general").append(twitter);
+      $("#state-container").append(twitter);
     }
-    $(".state-covid").append(stateLink);
+    $("#state-container").append(stateLink);
   }
 }
 

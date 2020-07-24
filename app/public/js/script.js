@@ -5,6 +5,7 @@ let time = moment().add(-2, "days").format("YYYY-MM-DD");
 let mapZoom;
 let clickZoom;
 
+//adjust zoom level of map depending on the screen size
 window.innerWidth < 600
   ? (mapZoom = 3) && (clickZoom = 4)
   : (mapZoom = 4) && (clickZoom = 5);
