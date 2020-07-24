@@ -27,7 +27,7 @@ function populateStateInfo(data) {
   let population = createElement("<h2>", "population: ");
   let governor = createElement("<h2>", "Governor: ");
 
-  $("#state-container").append(title, population, governor);
+  $(".state-area").append(title, population, governor);
 }
 
 //dynamically populate info to the site
@@ -98,9 +98,9 @@ function stateCovidSite(data) {
     if (stateCovidlinks[0].twitter) {
       twitter = $("<h2>").text("Twitter: " + stateCovidlinks[0].twitter);
 
-      $("#state-container").append(twitter);
+      $(".state-area").append(twitter);
     }
-    $("#state-container").append(stateLink);
+    $(".state-area").append(stateLink);
   }
 }
 
