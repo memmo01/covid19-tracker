@@ -35,6 +35,8 @@ function populateStateCovidData(stateData) {
   getFlagInfo(covidState);
 
   let div = createElement("<div>");
+  let date = createElement("<p>");
+  date.text("*as of " + stateData.date);
   div.addClass("graph-contain");
   let active = createElement("<h2>", `Active cases: ${stateData.active}`);
   let confirmed = createElement(
@@ -44,25 +46,33 @@ function populateStateCovidData(stateData) {
   let deaths = createElement("<h2>", `Deaths: ${stateData.deaths}`);
   let death_diff = createElement(
     "<h2>",
-    `Num of Deaths compared to previous day: ${stateData.death_diff}`
+    `Num of Deaths compared to previous day: ${stateData.deaths_diff}`
   );
   let confirm_diff = createElement(
     "<h2>",
-    `Num of Confirmed cases compared to previous day: ${stateData.confirmed_diff}`
+    `Num of Confirmed cases compared to previous day:  ${stateData.confirmed_diff}`
   );
+  let dailyChange = [
+    { location: death_diff, num: stateData.deaths_diff },
+    { location: confirm_diff, num: stateData.confirmed_diff },
+  ];
 
-  div.append(active, confirmed, deaths, death_diff, confirm_diff);
+  dailyChange.forEach((subject) => {
+    let numIncrease = createElement("<i>");
+    let numDecrease = createElement("<i>");
+    numIncrease.addClass("fa fa-arrow-circle-up");
+    numDecrease.addClass("fa fa-arrow-circle-down");
+
+    if (subject.num > 0) {
+      console.log("Larger");
+      subject.location.append(numIncrease);
+    } else if (subject.num < 0) {
+      subject.location.append(numDecrease);
+    }
+  });
+
+  div.append(date, active, confirmed, deaths, death_diff, confirm_diff);
   $(".state-covid").append(div);
-
-  attachImg(active, confirmed, deaths, death_diff, confirm_diff);
-
-  //this is a temporary graph placement. it eventually will display updated graph info using google analytics
-  function attachImg(...arg) {
-    arg.forEach((item) => {
-      let img = $("<img>").attr("src", "../images/download.png");
-      $(item).after(img);
-    });
-  }
 }
 
 function getFlagInfo(state) {
