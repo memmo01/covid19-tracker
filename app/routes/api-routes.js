@@ -13,4 +13,23 @@ module.exports = function (app, axios) {
       res.json(response.data.news);
     });
   });
+
+  app.get("/api/covidFiveDay", function (req, res) {
+    queryData().then(function (data) {
+      let history = data.data.stats.history;
+      let newData = [];
+      for (let i = 1; i < 6; i++) {
+        newData.push(history[history.length - i]);
+      }
+      res.json(newData);
+    });
+  });
+
+  function queryData(day) {
+    return axios({
+      url: "https://api.smartable.ai/coronavirus/stats/US",
+      method: "GET",
+      headers: { "Subscription-Key": process.env.SUB_KEY },
+    });
+  }
 };
