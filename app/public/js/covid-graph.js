@@ -1,5 +1,33 @@
+let covidCasesData = [];
+let covidDeaths = [];
+
+//changes size of charts based on screen size
+$(window).resize(function (e) {
+  console.log(e);
+  let width = $(".chart").width() - 10;
+  google.charts.setOnLoadCallback(
+    drawChart(
+      covidCasesData,
+      "usa-cases-five-day",
+      "Covid Cases the Past 5 Days",
+      width
+    )
+  );
+  google.charts.setOnLoadCallback(
+    drawChart(
+      covidDeaths,
+      "usa-five-day-deaths",
+      "Covid Deaths the Past 5 Days",
+      width
+    )
+  );
+});
+
+//load chart info
 google.charts.load("current", { packages: ["line"] });
-function drawChart(graphData) {
+
+// create chart
+function drawChart(graphData, location, graphTitle, newWidth) {
   var data = new google.visualization.DataTable();
   data.addColumn("date", "Time Of Day");
   data.addColumn("number", "Total Cases");
@@ -7,11 +35,11 @@ function drawChart(graphData) {
 
   var options = {
     chart: {
-      title: "Covid Data the Past 5 Days",
+      title: graphTitle,
       subtitle: "United States",
     },
+    width: newWidth,
     height: 300,
-    width: 600,
     hAxis: {
       format: "M/d/yy",
     },
@@ -20,31 +48,37 @@ function drawChart(graphData) {
     },
   };
 
-  var chart = new google.charts.Line(document.getElementById("USA-five-day"));
+  var chart = new google.charts.Line(document.getElementById(location));
 
   chart.draw(data, google.charts.Line.convertOptions(options));
 }
 
 getLastFiveDates();
 
-//make a call to the covid api and get the last 5 days worth of data sent back
-//loop through the data pushing it to an array within the loop
-//include date, confirmed deaths, and confirmed cases
-//push that array to a main array within the function
-// return main array
-
+//get data to load into chart
 function getLastFiveDates() {
   return $.ajax({
     url: "/api/covidFiveDay",
     method: "get",
   }).then(function (data) {
-    let graphData = [];
-
     data.forEach((item) => {
-      graphData.push([new Date(item.date), item.confirmed]);
+      covidCasesData.push([new Date(item.date), item.confirmed]);
+      covidDeaths.push([new Date(item.date), item.deaths]);
     });
-    console.log(graphData);
 
-    google.charts.setOnLoadCallback(drawChart(graphData));
+    google.charts.setOnLoadCallback(
+      drawChart(
+        covidCasesData,
+        "usa-cases-five-day",
+        "Covid Cases the Past 5 Days"
+      )
+    );
+    google.charts.setOnLoadCallback(
+      drawChart(
+        covidDeaths,
+        "usa-five-day-deaths",
+        "Covid Deaths the Past 5 Days"
+      )
+    );
   });
 }

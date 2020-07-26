@@ -14,6 +14,7 @@ module.exports = function (app, axios) {
     });
   });
 
+  //gets data of the last 5 days on the US
   app.get("/api/covidFiveDay", function (req, res) {
     queryData().then(function (data) {
       let history = data.data.stats.history;

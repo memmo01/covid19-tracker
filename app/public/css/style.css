@@ -266,7 +266,7 @@ table {
 }
 
 .usa-data-container {
-  width: 80%;
+  width: 95%;
   margin: 0 auto;
   background-color: rgba(208, 223, 230, 0.3);
 }
@@ -278,7 +278,7 @@ table {
 }
 
 #news {
-  width: 63%;
+  width: 55%;
   float: left;
 }
 #news img {
@@ -314,12 +314,14 @@ table {
 }
 #usa-data {
   float: right;
-  width: 35%;
+  width: 40%;
   padding-top: 30px;
 }
-.chart,
 #quicklinks {
   padding: 20px;
+}
+.chart {
+  padding: 5px;
 }
 .loader {
   border: 5px solid #f3f3f3;
@@ -338,7 +340,7 @@ table {
   z-index: 999;
 }
 .load-container {
-  width: 63%;
+  width: 50%;
   height: 0px;
 }
 .show {
