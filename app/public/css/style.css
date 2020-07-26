@@ -377,6 +377,19 @@ table {
   padding-bottom: 10px;
 }
 
+.state-container {
+  width: 55%;
+  margin: auto;
+}
+
+.state-container > .state-area {
+  float: none;
+  width: 100%;
+  padding: 20px 0 10px 40px;
+  min-height: 230px;
+  text-align: center;
+}
+
 .fa-arrow-circle-up {
   color: red;
   padding-left: 5px;
@@ -390,7 +403,7 @@ table {
 .state-area {
   float: left;
   width: 50%;
-  padding: 10px;
+  padding: 20px 0 10px 40px;
   min-height: 530px;
 }
 .state-area > h1 {

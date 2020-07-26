@@ -38,19 +38,25 @@ function populateStateCovidData(stateData) {
   let date = createElement("<p>");
   date.text("*as of " + stateData.date);
   div.addClass("graph-contain");
-  let active = createElement("<h2>", `Active cases: ${stateData.active}`);
+  let active = createElement(
+    "<h2>",
+    `Active cases: ${stateData.active.toLocaleString()}`
+  );
   let confirmed = createElement(
     "<h2>",
-    `Confirmed cases: ${stateData.confirmed}`
+    `Confirmed cases: ${stateData.confirmed.toLocaleString()}`
   );
-  let deaths = createElement("<h2>", `Deaths: ${stateData.deaths}`);
+  let deaths = createElement(
+    "<h2>",
+    `Deaths: ${stateData.deaths.toLocaleString()}`
+  );
   let death_diff = createElement(
     "<h2>",
-    `Num of Deaths compared to previous day: ${stateData.deaths_diff}`
+    `Num of Deaths compared to previous day: ${stateData.deaths_diff.toLocaleString()}`
   );
   let confirm_diff = createElement(
     "<h2>",
-    `Num of Confirmed cases compared to previous day:  ${stateData.confirmed_diff}`
+    `Num of Confirmed cases compared to previous day:  ${stateData.confirmed_diff.toLocaleString()}`
   );
   let dailyChange = [
     { location: death_diff, num: stateData.deaths_diff },
