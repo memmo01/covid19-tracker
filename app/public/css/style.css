@@ -358,7 +358,10 @@ table {
 } */
 
 /* state html page  */
-
+.wrapper {
+  width: 90%;
+  margin: auto;
+}
 #state-covid > div > h2,
 #state-covid > a,
 .state-area > h2,
@@ -373,14 +376,27 @@ table {
 #state-covid p {
   padding-bottom: 10px;
 }
-#state-graph,
+#state-health-dept,
 #state-covid {
   display: inline-block;
-  width: 45%;
+  margin: auto;
+}
+#state-covid {
+  width: 30%;
 }
 
-#state-graph {
+#state-health-dept {
+  width: fit-content;
+  max-width: 70%;
+  margin: auto;
+  display: block;
+}
+#state-health-dept > h2 {
+  font-size: 25px;
+}
+.state-health-wrapper {
   float: left;
+  width: 70%;
   padding-top: 40px;
 }
 .state-container > .state-area {
@@ -391,6 +407,18 @@ table {
   text-align: center;
 }
 
+.search-letters {
+  margin: auto;
+  display: block;
+  width: fit-content;
+  padding: 10px 0;
+}
+.letter {
+  margin: 0 2px;
+}
+.letter:hover {
+  cursor: pointer;
+}
 .fa-arrow-circle-up {
   color: red;
   padding-left: 5px;
