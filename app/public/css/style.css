@@ -129,9 +129,8 @@ q:after {
 /* my code starts here  */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
 
-html,
 body {
-  overflow-x: hidden;
+  overflow: auto;
 }
 
 header h1 {
@@ -148,6 +147,10 @@ header h1 {
   content: "";
   clear: both;
   display: table;
+}
+
+.row {
+  width: 100%;
 }
 table {
   border-collapse: collapse;
@@ -356,32 +359,30 @@ table {
 
 /* state html page  */
 
-.state-general,
-.state-covid {
-  width: 45%;
-  display: inline-block;
-}
-
-.state-covid > div > h2,
-.state-covid > a,
+#state-covid > div > h2,
+#state-covid > a,
 .state-area > h2,
 .state-area > a {
   font-size: 25px;
   padding: 7px 0px;
 }
-.state-covid > h1 {
+#state-covid > h1 {
   font-size: 40px;
   padding: 40px 0 20px;
 }
-.state-covid p {
+#state-covid p {
   padding-bottom: 10px;
 }
-
-.state-container {
-  width: 55%;
-  margin: auto;
+#state-graph,
+#state-covid {
+  display: inline-block;
+  width: 45%;
 }
 
+#state-graph {
+  float: left;
+  padding-top: 40px;
+}
 .state-container > .state-area {
   float: none;
   width: 100%;

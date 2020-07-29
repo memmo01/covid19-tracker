@@ -78,7 +78,9 @@ function populateStateCovidData(stateData) {
   });
 
   div.append(date, active, confirmed, deaths, death_diff, confirm_diff);
-  $(".state-covid").append(div);
+  $("#state-covid").append(div);
+
+  healthDeptInfo(covidState);
 }
 
 function getFlagInfo(state) {
@@ -131,4 +133,38 @@ function createElement(el, text, attr) {
     });
   }
   return newEl;
+}
+
+function healthDeptInfo(covidState) {
+  console.log(covidState);
+  //convert text for querying health info api
+  let stateText = covidState.split(" ").join("-").toLowerCase();
+  console.log(stateText);
+
+  getHealthDept(stateText).then(function (data) {
+    console.log(data);
+    data.forEach((dept) => {
+      displayHTML(dept);
+    });
+  });
+}
+
+function displayHTML(dept) {
+  let address;
+
+  if (dept.address) {
+    address = dept.address;
+  } else {
+    address = "";
+  }
+  let html = `<div> <p>${dept.name}</p> <p>${dept.phone}</p><p>${address}</p><p>${dept.website}</p></div>`;
+
+  $("#state-health-dept").append(html);
+}
+
+function getHealthDept(state) {
+  return $.ajax({
+    url: `https://postman-data-api-templates.github.io/county-health-departments/api/${state}.json`,
+    method: "GET",
+  });
 }
