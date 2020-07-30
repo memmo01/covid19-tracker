@@ -392,13 +392,23 @@ table {
   margin: auto;
   display: block;
 }
+#state-health-dept > h1 {
+  font-size: 40px;
+  padding: 40px 0 10px;
+}
+#state-health-dept > p {
+  font-size: 25px;
+  margin-bottom: 20px;
+  width: 70%;
+}
 #state-health-dept > h2 {
   font-size: 25px;
+  margin-bottom: 10px;
+  width: 60%;
 }
 .state-health-wrapper {
   float: left;
   width: 70%;
-  padding-top: 40px;
 }
 .state-container > .state-area {
   float: none;
@@ -406,6 +416,25 @@ table {
   padding: 20px 0 10px 40px;
   min-height: 230px;
   text-align: center;
+}
+#state-health-dept > input {
+  width: 50%;
+  height: 25px;
+  border-width: 1px;
+  box-shadow: inset 0px 0px 2px;
+  border-radius: 5px;
+}
+
+.state-dept-list {
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 40px 0;
+  width: 70%;
+}
+.local-dept {
+  font-size: 19px;
+  padding: 10px;
 }
 
 .search-letters {

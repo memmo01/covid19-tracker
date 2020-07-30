@@ -144,9 +144,9 @@ function healthDeptInfo(covidState) {
 
   getHealthDept(stateText).then(function (data) {
     healthDeptInfoArr.push(data);
-    data.forEach((dept) => {
-      displayHTML(dept);
-    });
+    // data.forEach((dept) => {
+    //   displayHTML(dept);
+    // });
   });
 }
 
@@ -158,7 +158,7 @@ function displayHTML(dept) {
   } else {
     address = "";
   }
-  let html = `<div> <p>${dept.name}</p> <p>${dept.phone}</p><p>${address}</p><p>${dept.website}</p></div>`;
+  let html = `<div class='local-dept'> <p>${dept.name}</p> <p>${dept.phone}</p><p>${address}</p><p><a href='${dept.website}' target='_blank'>${dept.website}</a></p></div>`;
 
   $(".state-dept-list").append(html);
 }
@@ -181,7 +181,7 @@ input.addEventListener("input", function (e) {
     let deptNameLower = department.name.toLowerCase();
     let deptCheck = deptNameLower.indexOf(userInput);
 
-    if (deptCheck > -1) {
+    if (deptCheck > -1 && userInput.length > 1) {
       return department;
     }
   });
