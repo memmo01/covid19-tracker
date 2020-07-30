@@ -4,6 +4,7 @@ let splitpath = path.split("/");
 let covidState = decodeURIComponent(splitpath[splitpath.length - 1]);
 let stateNoSpace = covidState.split(" ").join("");
 let time = moment().add(-2, "days").format("YYYY-MM-DD");
+let healthDeptInfoArr = [];
 
 checkCovid(covidState).then(function (response) {
   let data = response.data[0];
@@ -142,7 +143,7 @@ function healthDeptInfo(covidState) {
   console.log(stateText);
 
   getHealthDept(stateText).then(function (data) {
-    console.log(data);
+    healthDeptInfoArr.push(data);
     data.forEach((dept) => {
       displayHTML(dept);
     });
@@ -159,7 +160,7 @@ function displayHTML(dept) {
   }
   let html = `<div> <p>${dept.name}</p> <p>${dept.phone}</p><p>${address}</p><p>${dept.website}</p></div>`;
 
-  $("#state-health-dept").append(html);
+  $(".state-dept-list").append(html);
 }
 
 function getHealthDept(state) {
@@ -168,3 +169,25 @@ function getHealthDept(state) {
     method: "GET",
   });
 }
+
+//county input filter
+let input = document.getElementById("county-input");
+input.addEventListener("input", function (e) {
+  e.preventDefault();
+  let healthDeptList = healthDeptInfoArr[0];
+  let userInput = e.target.value.toLowerCase();
+
+  let newDeptList = healthDeptList.filter((department) => {
+    let deptNameLower = department.name.toLowerCase();
+    let deptCheck = deptNameLower.indexOf(userInput);
+
+    if (deptCheck > -1) {
+      return department;
+    }
+  });
+
+  $(".state-dept-list").empty();
+  newDeptList.forEach((dept) => {
+    displayHTML(dept);
+  });
+});

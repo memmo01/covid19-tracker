@@ -128,9 +128,10 @@ q:after {
 }
 /* my code starts here  */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
-
+html,
 body {
-  overflow: auto;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
 }
 
 header h1 {
@@ -149,9 +150,9 @@ header h1 {
   display: table;
 }
 
-.row {
+/* .row {
   width: 100%;
-}
+} */
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -387,7 +388,7 @@ table {
 
 #state-health-dept {
   width: fit-content;
-  max-width: 70%;
+  width: 70%;
   margin: auto;
   display: block;
 }
@@ -401,7 +402,7 @@ table {
 }
 .state-container > .state-area {
   float: none;
-  width: 100%;
+  margin: auto;
   padding: 20px 0 10px 40px;
   min-height: 230px;
   text-align: center;
