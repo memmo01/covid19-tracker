@@ -1,4 +1,4 @@
-let marker;
+
 let layer;
 let statesData;
 let time = moment().add(-2, "days").format("YYYY-MM-DD");
@@ -15,7 +15,7 @@ window.innerWidth < 600;
 var mymap = L.map("mapid").setView([38.3, -98.79], mapZoom);
 
 const attribution =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+  "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>";
 const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 L.tileLayer(tileUrl, { attribution }).addTo(mymap);
 getCovidNews();
@@ -47,18 +47,18 @@ function getColor(d) {
   return d > 150000
     ? "#b10026"
     : d > 100000
-    ? "#e31a1c"
-    : d > 50000
-    ? "#fc4e2a"
-    : d > 25000
-    ? "#fd8d3c"
-    : d > 10000
-    ? "#feb24c"
-    : d > 5000
-    ? "#fed976"
-    : d > 1000
-    ? "#ffeda0"
-    : "blue";
+      ? "#e31a1c"
+      : d > 50000
+        ? "#fc4e2a"
+        : d > 25000
+          ? "#fd8d3c"
+          : d > 10000
+            ? "#feb24c"
+            : d > 5000
+              ? "#fed976"
+              : d > 1000
+                ? "#ffeda0"
+                : "blue";
 }
 
 function styleData() {
@@ -77,13 +77,12 @@ function style(feature) {
 }
 
 //when map is clicked grab the lat and lng. then find out what state it is in. then make a call to the covid database. get information about that state and append it to the marker popup and zoom in on that state
-let preventDblClick = 0;
+
 function onMapClick(e) {
   $("#state-container").empty();
 
   let loader = $("<div>");
   loader.addClass("loader show");
-  preventDblClick++;
   $("#state-container").append(loader);
 
   let lat = e.latlng.lat;
@@ -115,7 +114,6 @@ function onMapClick(e) {
         // )
         // .openPopup();
       }
-      preventDblClick = 0;
     });
   });
 }
@@ -126,7 +124,7 @@ function checkCovid(state) {
     url: "/api/checkcovid",
     data: { state: state, time: time },
     timeout: 3000,
-    error: function (xmlhttprequest, textstatus, message) {
+    error: function (xmlhttprequest, textstatus) {
       if (textstatus === "timeout") {
         alert("got timeout");
       } else {
@@ -155,21 +153,6 @@ mymap.on("dblclick", function () {
 });
 
 function updateCovidStateHTML(state, data) {
-  // deconstruct data to organize in an object
-  const { active, confirmed, deaths, deaths_diff, confirmed_diff } = data[0];
-
-  let stateData = {
-    state: state,
-    covidData: {
-      active: active.toLocaleString(),
-      confirmed: confirmed.toLocaleString(),
-      deaths: deaths.toLocaleString(),
-      death_diff: deaths_diff.toLocaleString(),
-      confirmed_diff: confirmed_diff.toLocaleString(),
-    },
-  };
-
-  //send data to the server to be saved for later use on the individual state page
 
   $("#state-container >.loader").removeClass("show");
   let selected = statesData.features.filter(function (item) {
