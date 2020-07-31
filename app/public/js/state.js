@@ -1,10 +1,64 @@
+let stateFlagDetail = {
+  Alabama: { x: 0, y: -7, abbr: "AL" },
+  Alaska: { x: -134, y: -7, abbr: "AK" },
+  Arizona: { x: -265, y: -7, abbr: "AZ" },
+  Arkansas: { x: -399, y: -7, abbr: "AS" },
+  California: { x: -532, y: -7, abbr: "CA" },
+  Colorado: { x: -669, y: -7, abbr: "CO" },
+  Connecticut: { x: 0, y: -140, abbr: "CT" },
+  Delaware: { x: -134, y: -140, abbr: "DE" },
+  DistrictofColumbia: { x: -796, y: -7, abbr: "DC" },
+  Florida: { x: -268, y: -140, abbr: "FL" },
+  Georgia: { x: -399, y: -140, abbr: "GA" },
+  Hawaii: { x: -532, y: -140, abbr: "HI" },
+  Idaho: { x: -669, y: -140, abbr: "ID" },
+  Illinois: { x: -796, y: -140, abbr: "IL" },
+  Indiana: { x: 0, y: -270, abbr: "IN" },
+  Iowa: { x: -134, y: -270, abbr: "IA" },
+  Kansas: { x: -268, y: -270, abbr: "KS" },
+  Kentucky: { x: -399, y: -270, abbr: "KY" },
+  Louisiana: { x: -532, y: -270, abbr: "LA" },
+  Maine: { x: -669, y: -270, abbr: "ME" },
+  Maryland: { x: -796, y: -270, abbr: "MD" },
+  Massachusetts: { x: 0, y: -404, abbr: "MA" },
+  Michigan: { x: -134, y: -404, abbr: "MI" },
+  Minnesota: { x: -268, y: -404, abbr: "MN" },
+  Mississippi: { x: -399, y: -404, abbr: "MS" },
+  Missouri: { x: -532, y: -404, abbr: "MO" },
+  Montana: { x: -669, y: -404, abbr: "MT" },
+  Nebraska: { x: -796, y: -404, abbr: "NE" },
+  Nevada: { x: 0, y: -533, abbr: "NV" },
+  NewHampshire: { x: -134, y: -533, abbr: "NH" },
+  NewJersey: { x: -268, y: -533, abbr: "NJ" },
+  NewMexico: { x: -399, y: -533, abbr: "NM" },
+  NewYork: { x: -532, y: -533, abbr: "NY" },
+  NorthCarolina: { x: -669, y: -533, abbr: "NC" },
+  NorthDakota: { x: -796, y: -533, abbr: "ND" },
+  Ohio: { x: 0, y: -668, abbr: "OH" },
+  Oklahoma: { x: -134, y: -668, abbr: "OK" },
+  Oregon: { x: -268, y: -668, abbr: "OR" },
+  Pennsylvania: { x: -532, y: -668, abbr: "PA" },
+  RhodeIsland: { x: -669, y: -668, abbr: "RI" },
+  SouthCarolina: { x: -796, y: -668, abbr: "SC" },
+  SouthDakota: { x: 0, y: -802, abbr: "SD" },
+  Tennessee: { x: -134, y: -802, abbr: "TN" },
+  Texas: { x: -268, y: -802, abbr: "TX" },
+  Utah: { x: -399, y: -802, abbr: "UT" },
+  Virginia: { x: -669, y: -802, abbr: "VA" },
+  Washington: { x: -796, y: -802, abbr: "WA" },
+  WestVirginia: { x: -18, y: -923, abbr: "WV" },
+  Wisconsin: { x: -150, y: -923, abbr: "WI" },
+  Wyoming: { x: -282, y: -923, abbr: "WY" },
+};
+
 let path = window.location.pathname;
 let splitpath = path.split("/");
 //get url path to obtain state name
 let covidState = decodeURIComponent(splitpath[splitpath.length - 1]);
 let stateNoSpace = covidState.split(" ").join("");
-let time = moment().add(-2, "days").format("YYYY-MM-DD");
+let time = moment().add(-2, "days").format("YYYY-MM-DD"); 
 let healthDeptInfoArr = [];
+
 
 checkCovid(covidState).then(function (response) {
   let data = response.data[0];
@@ -23,7 +77,7 @@ function checkCovid(state) {
   });
 }
 
-function populateStateInfo(data) {
+function populateStateInfo() {
   let title = createElement("<h1>", covidState);
   let population = createElement("<h2>", "population: ");
   let governor = createElement("<h2>", "Governor: ");
@@ -84,9 +138,9 @@ function populateStateCovidData(stateData) {
   healthDeptInfo(covidState);
 }
 
-function getFlagInfo(state) {
-  let backgroundLocation = stateDetail[stateNoSpace];
-  $("#flag-contain").css("background-image", `url(/images/state-flags.jpg)`);
+function getFlagInfo() {
+  let backgroundLocation = stateFlagDetail[stateNoSpace];
+  $("#flag-contain").css("background-image", "url(/images/state-flags.jpg)");
   $("#flag-contain").css(
     "background-position",
     `${backgroundLocation.x}px ${backgroundLocation.y}px`
@@ -94,8 +148,8 @@ function getFlagInfo(state) {
 }
 
 //get state covid sites
-function stateCovidSite(data) {
-  let stateAbbr = stateDetail[stateNoSpace].abbr;
+function stateCovidSite() {
+  let stateAbbr = stateFlagDetail[stateNoSpace].abbr;
 
   $.get("https://covidtracking.com/api/states/info", function (data) {
     let stateCovidUrl = data.filter((stateData) => {
@@ -144,9 +198,6 @@ function healthDeptInfo(covidState) {
 
   getHealthDept(stateText).then(function (data) {
     healthDeptInfoArr.push(data);
-    // data.forEach((dept) => {
-    //   displayHTML(dept);
-    // });
   });
 }
 

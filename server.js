@@ -1,11 +1,10 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 const axios = require("axios");
 var PORT = process.env.PORT || 8000;
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());

@@ -26,7 +26,7 @@ module.exports = function (app, axios) {
     });
   });
 
-  function queryData(day) {
+  function queryData() {
     return axios({
       url: "https://api.smartable.ai/coronavirus/stats/US",
       method: "GET",
