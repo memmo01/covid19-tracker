@@ -463,6 +463,9 @@ table {
   font-size: 19px;
   padding: 10px;
 }
+.local-dept a{
+  word-break: break-all;
+}
 
 .search-letters {
   margin: auto;
@@ -640,5 +643,8 @@ table {
   }
   #state-health-dept > input {
     width:90%;
+  }
+  .state-dept-list{
+    width:100%;
   }
 }
