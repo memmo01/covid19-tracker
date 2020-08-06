@@ -130,8 +130,8 @@ q:after {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
 html,
 body {
-  /* overflow-x: hidden;
-  overflow-y: auto; */
+  min-width: 100vw;
+  overflow-x: hidden;
 }
 
 header h1 {
@@ -374,17 +374,30 @@ table {
   font-size: 40px;
   padding: 40px 0 20px;
 }
+.covid-data-row > div{
+  display:inline-block;
+  margin:0 10px;
+}
+.covid-data-row h2{
+  font-size:30px;
+}
+.covid-data-row p{
+  font-size:25px;
+  margin-top: 10px;
+}
+#state-covid{
+  display:block;
+  text-align:center;
+
+}
 #state-covid p {
   padding-bottom: 10px;
 }
-#state-health-dept,
-#state-covid {
+#state-health-dept {
   display: inline-block;
   margin: auto;
 }
-#state-covid {
-  width: 30%;
-}
+
 
 #state-health-dept {
   width: fit-content;
@@ -577,5 +590,19 @@ table {
   }
   .load-container {
     width: 100%;
+  }
+  .state-area > h1{
+    top:0;
+  }
+  .covid-data-row > div{
+    width:100%;
+    margin-top:10px;
+  }
+  .state-health-wrapper{
+    width:100%;
+  }
+  .state-container > .state-area{
+    width:300px;
+    padding-left:0px;
   }
 }

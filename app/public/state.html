@@ -1,68 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>state details</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <script
-      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  </head>
-  <body>
-    <header id="state-page-header">
-      <nav>
-        <a href="/">Home</a>
-      </nav>
-    </header>
-    <div class="state-container">
-      <div class="state-area">
-        <!--  dynamically load state title  -->
-        <div id="state-name"></div>
 
-        <!-- dynamially load state population  -->
-        <div id="state-population"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>state details</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
 
-        <!-- dynamically load map of state  -->
-        <div id="flag-contain"></div>
-      </div>
+<body>
+  <header id="state-page-header">
+    <nav>
+      <a href="/">Home</a>
+    </nav>
+  </header>
+  <div class="state-container">
+    <div class="state-area">
+      <!--  dynamically load state title  -->
+      <div id="state-name"></div>
 
-      <div class="row">
-        <div class="wrapper">
-          <div class="state-health-wrapper">
-            <div id="state-health-dept">
-              <h1>Need Assistance?</h1>
-              <p>Reach out to your local health department to get the information you need.</p>
-              <h2>Find Local State Health Deptartment Facility By County</h2>
-              <input id="county-input"/>
-            <div class="state-dept-list"></div>
-            
-            
-            </div>
+      <!-- dynamially load state population  -->
+      <div id="state-population"></div>
 
-            </div>
-          </div>
-          <div id="state-covid" class="Info">
-            <h1>Covid Details</h1>
-          </div>
-        </div>
-      </div>
-      <div class="row" style="clear: both;"></div>
+      <!-- dynamically load map of state  -->
+      <div id="flag-contain"></div>
     </div>
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
-    <script src="/js/state.js"></script>
-  </body>
+
+    <div class="row">
+      <div id="state-covid" class="Info">
+        <h1>Covid Details</h1>
+        <div class=covid-data-row>
+          <div>
+            <h2>Active Cases</h2>
+            <p id="act-case"></p>
+          </div>
+          <div>
+            <h2>Confirmed Cases</h2>
+            <p id="conf-case"></p>
+          </div>
+          <div>
+            <h2>Deaths</h2>
+            <p id="death-case"></p>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="state-health-wrapper">
+        <div id="state-health-dept">
+          <h1>Need Assistance?</h1>
+          <p>Reach out to your local health department to get the information you need.</p>
+          <h2>Find Local State Health Deptartment Facility By County</h2>
+          <input id="county-input" />
+          <div class="state-dept-list"></div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row" style="clear: both;"></div>
+  </div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="/js/state.js"></script>
+</body>
+
 </html>

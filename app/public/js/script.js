@@ -103,16 +103,6 @@ function onMapClick(e) {
       if (inUS) {
         layer = L.marker([lat, lng]);
         layer.addTo(mymap);
-
-        //pop up on map when clicked. add data here
-        // .bindPopup(
-        //   "<h1>" +
-        //   state +
-        //   "</h1><p>confirmed cases: " +
-        //   response.data[0].confirmed +
-        //   "</p>"
-        // )
-        // .openPopup();
       }
     });
   });

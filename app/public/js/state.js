@@ -56,7 +56,7 @@ let splitpath = path.split("/");
 //get url path to obtain state name
 let covidState = decodeURIComponent(splitpath[splitpath.length - 1]);
 let stateNoSpace = covidState.split(" ").join("");
-let time = moment().add(-2, "days").format("YYYY-MM-DD"); 
+let time = moment().add(-2, "days").format("YYYY-MM-DD");
 let healthDeptInfoArr = [];
 
 
@@ -92,48 +92,11 @@ function populateStateCovidData(stateData) {
   let div = createElement("<div>");
   let date = createElement("<p>");
   date.text("*as of " + stateData.date);
-  div.addClass("graph-contain");
-  let active = createElement(
-    "<h2>",
-    `Active cases: ${stateData.active.toLocaleString()}`
-  );
-  let confirmed = createElement(
-    "<h2>",
-    `Confirmed cases: ${stateData.confirmed.toLocaleString()}`
-  );
-  let deaths = createElement(
-    "<h2>",
-    `Deaths: ${stateData.deaths.toLocaleString()}`
-  );
-  let death_diff = createElement(
-    "<h2>",
-    `Num of Deaths compared to previous day: ${stateData.deaths_diff.toLocaleString()}`
-  );
-  let confirm_diff = createElement(
-    "<h2>",
-    `Num of Confirmed cases compared to previous day:  ${stateData.confirmed_diff.toLocaleString()}`
-  );
-  let dailyChange = [
-    { location: death_diff, num: stateData.deaths_diff },
-    { location: confirm_diff, num: stateData.confirmed_diff },
-  ];
 
-  dailyChange.forEach((subject) => {
-    let numIncrease = createElement("<i>");
-    let numDecrease = createElement("<i>");
-    numIncrease.addClass("fa fa-arrow-circle-up");
-    numDecrease.addClass("fa fa-arrow-circle-down");
+  $("#act-case").text(stateData.active.toLocaleString());
+  $("#conf-case").text(stateData.confirmed.toLocaleString());
+  $("#death-case").text(stateData.deaths.toLocaleString());
 
-    if (subject.num > 0) {
-      console.log("Larger");
-      subject.location.append(numIncrease);
-    } else if (subject.num < 0) {
-      subject.location.append(numDecrease);
-    }
-  });
-
-  div.append(date, active, confirmed, deaths, death_diff, confirm_diff);
-  $("#state-covid").append(div);
 
   healthDeptInfo(covidState);
 }
