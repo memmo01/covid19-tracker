@@ -379,8 +379,11 @@ table {
 }
 #state-covid > h1 {
   font-size: 40px;
-  padding: 40px 0 20px;
+  padding: 40px 0 5px;
   
+}
+.covid-data-row{
+  margin-top:20px;
 }
 .covid-data-row > div{
   display:inline-block;
@@ -519,7 +522,13 @@ table {
   display: block;
   position: relative;
   top: 30px;
-  right: 30px;
+  right: 50px;
+  color:#0d3f67;
+  font-weight:700;
+  font-size:20px;
+}
+#state-page-header nav a:hover{
+  text-decoration:underline;
 }
 
 /* Safari */
@@ -604,6 +613,10 @@ table {
   }
   .state-area > h1{
     top:0;
+    padding-bottom:10px;
+  }
+  .state-area > h2{
+  padding:10px 0;
   }
   .covid-data-row > div{
     width:100%;
@@ -615,5 +628,11 @@ table {
   .state-container > .state-area{
     width:300px;
     padding-left:0px;
+  }
+  #state-health-dept > p, #state-health-dept > h2{
+    width:100%;
+  }
+  #state-health-dept > input {
+    width:90%;
   }
 }

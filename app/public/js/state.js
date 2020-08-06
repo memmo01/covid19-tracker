@@ -64,7 +64,7 @@ checkCovid(covidState).then(function (response) {
   let data = response.data[0];
   populateStateCovidData(data);
   populateStateInfo(data);
-  stateCovidSite(data);
+
 });
 
 function checkCovid(state) {
@@ -77,12 +77,16 @@ function checkCovid(state) {
   });
 }
 
-function populateStateInfo() {
-  let title = createElement("<h1>", covidState);
-  let population = createElement("<h2>", "Population: ");
-  let governor = createElement("<h2>", "Governor: ");
+function populateStateInfo(data) {
+  getPopulation(covidState, function (statePop) {
+    let title = createElement("<h1>", covidState);
+    let population = createElement("<h2>", "Population: " + statePop.toLocaleString());
+    let governor = createElement("<h2>", "Governor: ");
 
-  $(".state-area").append(title, population, governor);
+    $(".state-area").append(title, population, governor);
+    stateCovidSite(data);
+  });
+
 }
 
 //dynamically populate info to the site
@@ -181,6 +185,24 @@ function getHealthDept(state) {
   return $.ajax({
     url: `https://postman-data-api-templates.github.io/county-health-departments/api/${state}.json`,
     method: "GET",
+  });
+}
+
+function getPopulation(state, cb) {
+  $.ajax({
+    url: "https://datausa.io/api/data?drilldowns=State&measures=Population&year=latest",
+    method: "GET"
+  }).then(function (results) {
+    let stData = results.data;
+
+    let statePop = stData.filter((data) => {
+      if (data.State === state) {
+        return data;
+      }
+
+    });
+    cb(statePop[0].Population);
+    //find state population and then return function
   });
 }
 

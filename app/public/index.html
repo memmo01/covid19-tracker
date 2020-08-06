@@ -1,49 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Covid-19 App</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-      crossorigin=""
-    />
-    <link rel="stylesheet" href="/css/style.css" />
-    <script
-      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""
-    ></script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
-  </head>
 
-  <body>
-    <header>
-      <h1>Covid-19 United States Data</h1>
-    </header>
-    <div class="row clearfix">
-      <div class="load-container">
-        <div class="loader show"></div>
-      </div>
-      <div class="map-container">
-        <div id="mapid"></div>
-        <div class="map-key-container">
-          <h1>Total Covid-19 Cases</h1>
-          <div class="map-key">
-            <div class="key-box">
-              <div class="key-color" style="background: #fff7f7;"></div>
-              <div class="key-num">< 1,000</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Covid-19 App</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Covid-19 United States Data</h1>
+  </header>
+  <div class="row clearfix">
+    <div class="load-container">
+      <div class="loader show"></div>
+    </div>
+    <div class="map-container">
+      <div id="mapid"></div>
+      <div class="map-key-container">
+        <h1>Total Covid-19 Cases</h1>
+        <div class="map-key">
+          <div class="key-box">
+            <div class="key-color" style="background: #fff7f7;"></div>
+            <div class="key-num">
+              < 1,000</div>
             </div>
             <div class="key-box">
               <div class="key-color" style="background: #ffeda0;"></div>
@@ -84,7 +75,7 @@
       <section id="news"></section>
       <aside id="usa-data">
         <div class="usa-data-container">
-          <h1>covid-19 Info</h1>
+          <h1>Covid-19 Info</h1>
           <div class="chart">
             <div id="usa-cases-five-day" class="chart"></div>
             <div id="usa-five-day-deaths" class="chart"></div>
@@ -98,11 +89,9 @@
     </div>
 
     <script src="/js/script.js"></script>
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script type="text/javascript" src="/js/covid-graph.js"></script>
-  </body>
+</body>
+
 </html>
