@@ -379,8 +379,11 @@ table {
 }
 #state-covid > h1 {
   font-size: 40px;
-  padding: 40px 0 20px;
+  padding: 40px 0 5px;
   
+}
+.covid-data-row{
+  margin-top:20px;
 }
 .covid-data-row > div{
   display:inline-block;
@@ -615,5 +618,11 @@ table {
   .state-container > .state-area{
     width:300px;
     padding-left:0px;
+  }
+  #state-health-dept > p, #state-health-dept > h2{
+    width:100%;
+  }
+  #state-health-dept > input {
+    width:90%;
   }
 }
