@@ -345,7 +345,7 @@ table {
   z-index: 999;
 }
 .load-container {
-  width: 50%;
+  width: 63%;
   height: 0px;
 }
 .show {
@@ -553,6 +553,12 @@ table {
 @media (max-width: 778px) {
   .map-container {
     width: 100%;
+  }
+  .load-container{
+    width:100%;
+  }
+  .loader{
+    top:130px;
   }
   #mapid {
     height: 350px;
