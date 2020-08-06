@@ -79,7 +79,7 @@ function checkCovid(state) {
 
 function populateStateInfo() {
   let title = createElement("<h1>", covidState);
-  let population = createElement("<h2>", "population: ");
+  let population = createElement("<h2>", "Population: ");
   let governor = createElement("<h2>", "Governor: ");
 
   $(".state-area").append(title, population, governor);
@@ -89,13 +89,13 @@ function populateStateInfo() {
 function populateStateCovidData(stateData) {
   getFlagInfo(covidState);
 
-  let div = createElement("<div>");
   let date = createElement("<p>");
   date.text("*as of " + stateData.date);
 
   $("#act-case").text(stateData.active.toLocaleString());
   $("#conf-case").text(stateData.confirmed.toLocaleString());
   $("#death-case").text(stateData.deaths.toLocaleString());
+  $("#asOfDate").text(`*As of : ${stateData.date}`);
 
 
   healthDeptInfo(covidState);
@@ -172,7 +172,7 @@ function displayHTML(dept) {
   } else {
     address = "";
   }
-  let html = `<div class='local-dept'> <p>${dept.name}</p> <p>${dept.phone}</p><p>${address}</p><p><a href='${dept.website}' target='_blank'>${dept.website}</a></p></div>`;
+  let html = `<div class= 'local-dept'> <p>${dept.name}</p> <p>${dept.phone}</p><p>${address}</p><p><a href='${dept.website}' target='_blank'>${dept.website}</a></p></div> `;
 
   $(".state-dept-list").append(html);
 }
