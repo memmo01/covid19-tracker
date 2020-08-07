@@ -33,4 +33,5 @@ module.exports = function (app, axios) {
       headers: { "Subscription-Key": process.env.SUB_KEY },
     });
   }
+
 };
