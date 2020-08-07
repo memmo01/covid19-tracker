@@ -598,6 +598,17 @@ table {
   .covid-container {
     width: 100%;
   }
+  #flag-contain{
+    margin:auto;
+    display:block;
+  }
+  #state-container > h1{
+    display:block;
+    bottom:0;
+    text-align:center;
+    padding-bottom:10px;
+    padding-left:0;
+  }
 
   #news li {
     display: block;
