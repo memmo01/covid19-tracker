@@ -7,25 +7,22 @@ module.exports = function (siteData,state,cb) {
   let cleanArr=[];
   let num;
   $(".current-governors__item__link").each(function () {
-    let te = $(this).text();
+    let siteText = $(this).text();
    
 
-    splitGov.push(te.trim().split("\n"));
+    splitGov.push(siteText.trim().split("\n"));
     cleanArr = splitGov.map((item,index) => {
       let newArr = [];
       item.forEach((indi) => {
         newArr.push(indi.trim());
-        if(indi.trim().toLowerCase() ===state){
+        if(indi.trim().toLowerCase() ===state.toLowerCase()){
           num=index;
         }
         
       });
       return newArr;
     });
- 
-
- 
-    
+     
   });
-  cb(cleanArr[num])
+  cb(cleanArr[num]);
 };

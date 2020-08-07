@@ -79,12 +79,15 @@ function checkCovid(state) {
 
 function populateStateInfo(data) {
   getPopulation(covidState, function (statePop) {
-    let title = createElement("<h1>", covidState);
-    let population = createElement("<h2>", "Population: " + statePop.toLocaleString());
-    let governor = createElement("<h2>", "Governor: ");
-
-    $(".state-area").append(title, population, governor);
-    stateCovidSite(data);
+    getGovernor(covidState,function(stateGovernor){
+      let title = createElement("<h1>", covidState);
+      let population = createElement("<h2>", "Population: " + statePop.toLocaleString());
+      let governor = createElement("<h2>", "Governor: "+stateGovernor);
+  
+      $(".state-area").append(title, population, governor);
+      stateCovidSite(data);
+    });
+   
   });
 
 }
@@ -203,6 +206,14 @@ function getPopulation(state, cb) {
     });
     cb(statePop[0].Population);
     //find state population and then return function
+  });
+}
+
+
+function getGovernor(state,cb){
+  $.ajax({url:"/api/governor/"+state,
+    method:"GET"}).then(function(response){
+    cb(response[1]);
   });
 }
 
