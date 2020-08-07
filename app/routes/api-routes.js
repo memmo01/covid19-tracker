@@ -1,3 +1,5 @@
+let htmlParse = require("../utilities/html-parse");
+
 module.exports = function (app, axios) {
   app.get("/api/state/:state", function (req, res) {
     //get state and begin running it through api calls to gather information about covid, general state info (population, governer, any updated news (state of emergencies)), a weeks worth of data, and nearby covid testing centers
@@ -34,4 +36,17 @@ module.exports = function (app, axios) {
     });
   }
 
+  app.get("/api/governor/:state", function (req, res) {
+    axios({
+      url: "https://www.nga.org/governors/",
+      method: "GET"
+    }).then(function (response) {
+      htmlParse(response,req.params.state,function(stateGov){
+        res.json(stateGov);
+      });
+    });
+  });
+
 };
+
+
