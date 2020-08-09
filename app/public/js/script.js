@@ -116,7 +116,8 @@ function checkCovid(state) {
     timeout: 3000,
     error: function (xmlhttprequest, textstatus) {
       if (textstatus === "timeout") {
-        alert("got timeout");
+        alert("page timedout");
+        location.reload();
       } else {
         alert(textstatus);
       }

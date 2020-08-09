@@ -1,4 +1,4 @@
-let htmlParse = require("../utilities/html-parse");
+let queryDb = require("../utilities/query-db");
 
 module.exports = function (app, axios) {
   app.get("/api/state/:state", function (req, res) {
@@ -37,14 +37,13 @@ module.exports = function (app, axios) {
   }
 
   app.get("/api/governor/:state", function (req, res) {
-    axios({
-      url: "https://www.nga.org/governors/",
-      method: "GET"
-    }).then(function (response) {
-      htmlParse(response,req.params.state,function(stateGov){
-        res.json(stateGov);
-      });
+    //call sequelize on query -db page
+    queryDb.getGovernor(req.params.state).then(function(data){
+      let govName = data[0].name;
+     
+      res.json(govName);
     });
+
   });
 
 };

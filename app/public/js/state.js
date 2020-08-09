@@ -213,7 +213,7 @@ function getPopulation(state, cb) {
 function getGovernor(state,cb){
   $.ajax({url:"/api/governor/"+state,
     method:"GET"}).then(function(response){
-    cb(response[1]);
+    cb(response);
   });
 }
 
