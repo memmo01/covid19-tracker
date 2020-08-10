@@ -59,6 +59,11 @@ let stateNoSpace = covidState.split(" ").join("");
 let time = moment().add(-2, "days").format("YYYY-MM-DD");
 let healthDeptInfoArr = [];
 
+//add loader while gathering state information
+addLoader(".state-area");
+
+
+
 
 checkCovid(covidState).then(function (response) {
   let data = response.data[0];
@@ -131,6 +136,7 @@ function stateCovidSite() {
   });
 
   function populateToHTML(stateCovidlinks) {
+    removeLoader(".state-area > .loader");
     let link = stateCovidlinks[0].covid19Site;
     let twitter;
 
@@ -238,3 +244,13 @@ input.addEventListener("input", function (e) {
     displayHTML(dept);
   });
 });
+
+function addLoader(location){
+  let load =$("<div>").addClass("loader show");
+  $(`${location}`).append(load);
+  
+}
+
+function removeLoader(location){
+  $(`${location}`).removeClass("show");
+}
