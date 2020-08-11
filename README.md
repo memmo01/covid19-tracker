@@ -1,6 +1,6 @@
 # Covid 19 Tracker
 
-  ![](https://img.shields.io/github/languages/top/memmo01/covid19-tracker)
+  ![](https://img.shields.io/github/languages/top/memmo01/covid19-tracker) ![](https://api.travis-ci.org/memmo01/covid19-tracker.svg)
   
   ## Description
   
