@@ -13,7 +13,8 @@
   * [Installation](#installation)
 
   * [Usage](#usage)
-
+  
+  * [Author](#author)
   
   
   
@@ -25,7 +26,9 @@
   ## Usage
 
   To use the application select the state you want covid-19 data on. If you want more specific state details such as : governor info, twitter info, population, or local state health facility contact information then select the state details button. To read up-to-date news about the virus you can select an article under the map on the main page.
+   
+  ## Author
   
-  
+  Michael Emmons
   
   
