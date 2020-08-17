@@ -1,6 +1,17 @@
 let queryDb = require("../utilities/query-db");
+let filterData = require("../utilities/filters");
 
 module.exports = function (app, axios) {
+
+  // get information about state twitter
+  app.get("/api/covidtracking/:stateabbr", function (req, res) {
+    axios({ url: "https://covidtracking.com/api/states/info", method: "GET" }).then(function (response) {
+      let stateCovidUrl = filterData(response.data, req.params.stateabbr);
+      res.json(stateCovidUrl);
+    });
+  });
+
+
   app.get("/api/state/:state", function (req, res) {
     //get state and begin running it through api calls to gather information about covid, general state info (population, governer, any updated news (state of emergencies)), a weeks worth of data, and nearby covid testing centers
     res.json({ state: req.params.state, population: 300000 });
@@ -38,9 +49,9 @@ module.exports = function (app, axios) {
 
   app.get("/api/governor/:state", function (req, res) {
     //call sequelize on query -db page
-    queryDb.getGovernor(req.params.state).then(function(data){
+    queryDb.getGovernor(req.params.state).then(function (data) {
       let govName = data[0].name;
-     
+
       res.json(govName);
     });
 

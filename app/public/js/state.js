@@ -84,15 +84,15 @@ function checkCovid(state) {
 
 function populateStateInfo(data) {
   getPopulation(covidState, function (statePop) {
-    getGovernor(covidState,function(stateGovernor){
+    getGovernor(covidState, function (stateGovernor) {
       let title = createElement("<h1>", covidState);
       let population = createElement("<h2>", "Population: " + statePop.toLocaleString());
-      let governor = createElement("<h2>", "Governor: "+stateGovernor);
-  
+      let governor = createElement("<h2>", "Governor: " + stateGovernor);
+
       $(".state-area").append(title, population, governor);
       stateCovidSite(data);
     });
-   
+
   });
 
 }
@@ -125,14 +125,9 @@ function getFlagInfo() {
 //get state covid sites
 function stateCovidSite() {
   let stateAbbr = stateFlagDetail[stateNoSpace].abbr;
+  $.get("/api/covidtracking/" + stateAbbr, function (data) {
 
-  $.get("https://covidtracking.com/api/states/info", function (data) {
-    let stateCovidUrl = data.filter((stateData) => {
-      if (JSON.stringify(stateData.state) === JSON.stringify(stateAbbr)) {
-        return stateData;
-      }
-    });
-    populateToHTML(stateCovidUrl);
+    populateToHTML(data);
   });
 
   function populateToHTML(stateCovidlinks) {
@@ -216,9 +211,11 @@ function getPopulation(state, cb) {
 }
 
 
-function getGovernor(state,cb){
-  $.ajax({url:"/api/governor/"+state,
-    method:"GET"}).then(function(response){
+function getGovernor(state, cb) {
+  $.ajax({
+    url: "/api/governor/" + state,
+    method: "GET"
+  }).then(function (response) {
     cb(response);
   });
 }
@@ -245,12 +242,12 @@ input.addEventListener("input", function (e) {
   });
 });
 
-function addLoader(location){
-  let load =$("<div>").addClass("loader show");
+function addLoader(location) {
+  let load = $("<div>").addClass("loader show");
   $(`${location}`).append(load);
-  
+
 }
 
-function removeLoader(location){
+function removeLoader(location) {
   $(`${location}`).removeClass("show");
 }
