@@ -14,6 +14,8 @@
 
   * [Usage](#usage)
   
+  * [Images](#images)
+  
   * [Author](#author)
   
   
@@ -27,6 +29,16 @@
 
   To use the application select the state you want covid-19 data on. If you want more specific state details such as : governor info, twitter info, population, or local state health facility contact information then select the state details button. To read up-to-date news about the virus you can select an article under the map on the main page.
    
+  ## Images
+  ### Landing Page
+  ![](./application_images/landing_page.JPG)  
+  ### Landing Page gif
+  ![](./application_images/state_search.gif)    
+  ### State page
+  ![](./application_images/state_page.JPG)
+  ### State Page gif
+  ![](./application_images/facility_search.gif)
+  
   ## Author
   
   Michael Emmons
